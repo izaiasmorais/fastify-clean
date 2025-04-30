@@ -1,5 +1,6 @@
 import { CustomError } from "../../core/errors/custom-error";
 import { Either, left, right } from "../../core/types/either";
+import { Email } from "../entities/value-objects/email";
 import { Role } from "../entities/value-objects/role";
 import { UsersRepository } from "../repositories/users-repository";
 
@@ -13,7 +14,7 @@ type GetProfileUseCaseResponse = Either<
 		user: {
 			id: string;
 			name: string;
-			email: string;
+			email: Email;
 			role: Role;
 		};
 	}

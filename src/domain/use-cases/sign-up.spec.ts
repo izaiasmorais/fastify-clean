@@ -3,6 +3,7 @@ import { InMemoryUsersRepository } from "../../../test/repositories/in-memory-us
 import { FakeHasher } from "../../../test/cryptography/fake-hasher";
 import { SignUpUseCase } from "./sign-up";
 import { makeUser } from "../../../test/factories/make-user";
+import { Email } from "../entities/value-objects/email";
 
 let inMemoryUsersRepository: InMemoryUsersRepository;
 let fakeHasher: FakeHasher;
@@ -19,7 +20,7 @@ describe("Sign Up Use Case", () => {
 		const user = makeUser();
 		const result = await sut.execute({
 			name: user.name,
-			email: user.email,
+			email: user.email.toString(),
 			phone: user.phone,
 			document: user.document,
 			password: user.password,
@@ -34,17 +35,17 @@ describe("Sign Up Use Case", () => {
 
 	it("should not be able to sign up with existing email", async () => {
 		const existingUser = makeUser({
-			email: "john@doe.com",
+			email: Email.create("john@doe.com"),
 		});
 		const newUser = makeUser({
-			email: "john@doe.com",
+			email: Email.create("john@doe.com"),
 		});
 
 		await inMemoryUsersRepository.create(existingUser);
 
 		const result = await sut.execute({
 			name: newUser.name,
-			email: newUser.email,
+			email: newUser.email.toString(),
 			phone: newUser.phone,
 			document: newUser.document,
 			password: newUser.password,
@@ -60,11 +61,11 @@ describe("Sign Up Use Case", () => {
 
 	it("should not be able to sign up with existing document", async () => {
 		const existingUser = makeUser({
-			email: "john@doe.com",
+			email: Email.create("john@doe.com"),
 			document: "12345678900",
 		});
 		const newUser = makeUser({
-			email: "test@email.com",
+			email: Email.create("test@email.com"),
 			document: "12345678900",
 		});
 
@@ -72,7 +73,7 @@ describe("Sign Up Use Case", () => {
 
 		const result = await sut.execute({
 			name: newUser.name,
-			email: newUser.email,
+			email: newUser.email.toString(),
 			phone: newUser.phone,
 			document: newUser.document,
 			password: newUser.password,

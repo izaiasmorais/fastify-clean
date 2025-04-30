@@ -2,11 +2,12 @@ import { Entity } from "../../core/entities/entity";
 import { UniqueEntityID } from "../../core/entities/unique-entity-id";
 import { Optional } from "../../core/types/optional";
 import { getCurrentDate } from "../../core/utils/get-current-date";
+import { Email } from "./value-objects/email";
 import { Role } from "./value-objects/role";
 
 export interface UserProps {
 	name: string;
-	email: string;
+	email: Email;
 	phone: string;
 	document: string;
 	role: Role;

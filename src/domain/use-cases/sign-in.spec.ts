@@ -4,6 +4,7 @@ import { InMemoryUsersRepository } from "../../../test/repositories/in-memory-us
 import { FakeEncrypter } from "../../../test/cryptography/fake-encrypter";
 import { FakeHasher } from "../../../test/cryptography/fake-hasher";
 import { makeUser } from "../../../test/factories/make-user";
+import { Email } from "../entities/value-objects/email";
 
 let inMemoryUsersRepository: InMemoryUsersRepository;
 let fakeEncrypter: FakeEncrypter;
@@ -20,7 +21,7 @@ describe("Sign In Use Case", () => {
 
 	it("should be able to authenticate with valid credentials", async () => {
 		const user = makeUser({
-			email: "john@doe.com",
+			email: Email.create("john@doe.com"),
 			password: "12345678-hashed",
 		});
 
@@ -54,7 +55,7 @@ describe("Sign In Use Case", () => {
 
 	it("should not be able to authenticate with wrong password", async () => {
 		const user = makeUser({
-			email: "john@doe.com",
+			email: Email.create("john@doe.com"),
 			password: "12345678-hashed",
 		});
 

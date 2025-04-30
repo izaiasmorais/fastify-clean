@@ -45,6 +45,7 @@ export async function getProfile(app: FastifyInstance) {
 				errors: null,
 				data: {
 					...response.value.user,
+					email: response.value.user.email.toString(),
 					role: response.value.user.role.getValue(),
 				},
 			});

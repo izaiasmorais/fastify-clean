@@ -7,9 +7,11 @@
 		"dev": "tsx watch src/infra/http/server.ts",
 		"build": "tsup src !src/**/*.spec.ts !src/**/test/**/* --out-dir dist --minify",
 		"start": "node dist/infra/http/server.js",
+
 		"migrate": "pnpm prisma migrate dev",
 		"generate": "pnpm prisma generate",
 		"studio": "pnpm prisma studio -b chrome -p 5174",
+
 		"test": "vitest run",
 		"test:ui": "vitest --ui",
 		"test:watch": "vitest",
@@ -18,6 +20,7 @@
 		"test:debug": "vitest --inspect-brk --inspect --logHeapUsage --threads=false",
 		"test:e2e": "vitest run --config ./vitest.config.e2e.mts",
 		"test:e2e-ui": "vitest --ui --config ./vitest.config.e2e.mts",
+		
 		"lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
 		"lint:fix": "eslint src --ext ts,tsx --fix"
 	},

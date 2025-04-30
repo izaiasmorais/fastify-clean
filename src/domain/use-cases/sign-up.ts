@@ -3,6 +3,7 @@ import { UsersRepository } from "../repositories/users-repository";
 import { Either, left, right } from "../../core/types/either";
 import { CustomError } from "../../core/errors/custom-error";
 import { HashGenerator } from "../cryptography/hash-generator";
+import { Email } from "../entities/value-objects/email";
 
 type SignUpUseCaseRequest = {
 	name: string;
@@ -46,6 +47,7 @@ export class SignUpUseCase {
 
 		const user = User.create({
 			...request,
+			email: Email.create(request.email),
 			password: hashedPassword,
 		});
 
