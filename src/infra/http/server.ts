@@ -58,7 +58,6 @@ const start = async () => {
 	} catch (err) {
 		console.error(err);
 		app.log.error(err);
-		process.exit(1);
 	}
 };
 
