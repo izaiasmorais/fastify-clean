@@ -13,7 +13,6 @@ export async function signUp(app: FastifyInstance) {
 				tags: ["Auth"],
 				operationId: "signUp",
 				summary: "Register a new user",
-				security: [{ bearerAuth: [] }],
 				body: signUpRequestBodySchema.describe("Sign up request body"),
 				response: {
 					201: successResponseSchema(z.null()).describe("Created"),

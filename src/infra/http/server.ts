@@ -17,7 +17,7 @@ const port = env.ENV_PORT;
 
 const version = "1.0.0 - Release 1";
 
-const app = fastify().withTypeProvider<ZodTypeProvider>();
+export const app = fastify().withTypeProvider<ZodTypeProvider>();
 
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);

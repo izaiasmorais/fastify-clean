@@ -1,13 +1,10 @@
 services:
-  postgres:
-    container_name: fastify-pg
-    image: postgres
+  fastify-api-postgres:
+    container_name: fastify-clean-arch-postgres
+    image: bitnami/postgresql
     ports:
       - 5432:5432
     environment:
-      POSTGRES_USER: postgres
+      POSTGRES_USER: docker
       POSTGRES_PASSWORD: docker
       POSTGRES_DB: fastify
-      PGDATA: /data/postgres
-    volumes:
-      - ./data/pg:/data/postgres

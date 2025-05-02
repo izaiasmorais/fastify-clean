@@ -6,6 +6,14 @@ export default defineConfig({
 	test: {
 		globals: true,
 		root: "./",
+		workspace: [
+			{
+				extends: true,
+				test: {
+					environment: "prisma",
+				},
+			},
+		],
 	},
 	plugins: [
 		tsConfigPaths(),

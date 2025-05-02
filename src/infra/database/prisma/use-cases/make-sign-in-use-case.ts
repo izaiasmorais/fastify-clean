@@ -7,7 +7,7 @@ import { BcryptAdapter } from "../../../adapters/bcrypt-adapter";
 export function makeSignInUseCase(reply: FastifyReply) {
 	const UsersRepository = new PrismaUsersRepository();
 	const encrypter = new JwtEncrypter(reply);
-	const hashComparer = new BcryptAdapter(10);
+	const hashComparer = new BcryptAdapter(6);
 
 	const useCase = new SignInUseCase(UsersRepository, hashComparer, encrypter);
 

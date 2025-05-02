@@ -4,7 +4,7 @@ import { BcryptAdapter } from "../../../adapters/bcrypt-adapter";
 
 export function makeSignUpUseCase() {
 	const UsersRepository = new PrismaUsersRepository();
-	const hashGenerator = new BcryptAdapter(10);
+	const hashGenerator = new BcryptAdapter(6);
 
 	const useCase = new SignUpUseCase(UsersRepository, hashGenerator);
 
