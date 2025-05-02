@@ -55,7 +55,6 @@ app.register(authRoutes);
 const start = async () => {
 	try {
 		await app.listen({ port: Number(port), host: "0.0.0.0" });
-		console.log(`HTTP server running at port ${port}`);
 	} catch (err) {
 		console.error(err);
 		app.log.error(err);

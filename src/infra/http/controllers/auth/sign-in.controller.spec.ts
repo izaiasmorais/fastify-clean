@@ -1,5 +1,5 @@
 import request from "supertest";
-import { afterAll, beforeAll, describe, it } from "vitest";
+import { afterAll, beforeAll, describe, it, expect } from "vitest";
 import { app } from "../../server";
 import { prisma } from "../../../database/prisma/prisma";
 import { hash } from "bcrypt";
