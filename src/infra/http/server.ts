@@ -13,7 +13,7 @@ import { env } from "../env/env";
 import { errorHandler } from "./error-handler";
 import { authRoutes } from "./controllers/auth/auth.routes";
 
-const port = env.ENV_PORT;
+const port = env.ENV_PORT || 3333;
 
 const version = "1.0.0 - Release 1";
 
