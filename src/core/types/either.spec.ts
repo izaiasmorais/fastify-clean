@@ -1,4 +1,5 @@
 import { Either, right, left } from "./either";
+import { test, expect } from "vitest";
 
 function doSomeThing(shouldSuccess: boolean): Either<string, number> {
 	if (shouldSuccess) {

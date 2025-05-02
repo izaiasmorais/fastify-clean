@@ -1,4 +1,5 @@
 import { Optional } from "./optional";
+import { test, expect } from "vitest";
 
 type User = {
 	id: string;
