@@ -18,5 +18,6 @@
 		"forceConsistentCasingInFileNames": false,
 		"noFallthroughCasesInSwitch": false,
 		"types": ["vitest/globals"]
-	}
+	},
+	"exclude": ["node_modules", "dist", "prisma/migrations", "**/*.js"]
 }

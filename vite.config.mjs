@@ -5,8 +5,6 @@ export default defineConfig({
 	plugins: [tsconfigPaths()],
 	test: {
 		environmentMatchGlobs: [["src/infra/http/controllers/**", "prisma"]],
-		poolOptions: {
-			threads: false,
-		},
+		exclude: ["**/node_modules/**", "**/dist/**", "**/prisma/**"],
 	},
 });
