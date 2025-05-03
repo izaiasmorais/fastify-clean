@@ -58,4 +58,4 @@ jobs:
         run: pnpm test:e2e
         env:
           JWT_SECRET: testing
-          DATABASE_URL: "postgresql://docker:docker@localhost:5432/fastify?schema=public"
+          DATABASE_URL: "postgresql://docker:docker@localhost:5432/fastify"

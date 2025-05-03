@@ -1,5 +1,5 @@
 import request from "supertest";
-import { expect, afterAll, beforeAll, beforeEach, describe, it } from "vitest";
+import { afterAll, beforeAll, beforeEach, describe, it, expect } from "vitest";
 import { app } from "../../app";
 import { prisma } from "../../../database/prisma/prisma";
 import { hash } from "bcrypt";
@@ -25,10 +25,14 @@ describe("Get Profile (e2e)", () => {
 				phone: "86988889999",
 				document: "11111111111",
 				password: await hash("00000000", 6),
+				role: "MEMBER",
 			},
 		});
 
-		const accessToken = app.jwt.sign({ sub: user.id.toString() });
+		const accessToken = app.jwt.sign({
+			sub: user.id.toString(),
+			role: user.role,
+		});
 
 		const response = await request(app.server)
 			.get("/users/profile")
@@ -51,10 +55,18 @@ describe("Get Profile (e2e)", () => {
 		const response = await request(app.server).get("/users/profile");
 
 		expect(response.statusCode).toEqual(401);
+		expect(response.body).toEqual({
+			success: false,
+			errors: ["Não autorizado"],
+			data: null,
+		});
 	});
 
 	it("should not be able to get profile with invalid user id", async () => {
-		const accessToken = app.jwt.sign({ sub: "invalid-user-id" });
+		const accessToken = app.jwt.sign({
+			sub: "invalid-user-id",
+			role: "MEMBER",
+		});
 
 		const response = await request(app.server)
 			.get("/users/profile")

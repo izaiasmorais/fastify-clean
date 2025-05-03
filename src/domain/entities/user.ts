@@ -41,28 +41,6 @@ export class User extends Entity<UserProps> {
 		return this.props.role;
 	}
 
-	get createdAt() {
-		return this.props.createdAt;
-	}
-
-	get updatedAt() {
-		return this.props.updatedAt;
-	}
-
-	private touch() {
-		this.props.updatedAt = getCurrentDate();
-	}
-
-	set name(name: string) {
-		this.props.name = name;
-		this.touch();
-	}
-
-	set phone(phone: string) {
-		this.props.phone = phone;
-		this.touch();
-	}
-
 	static create(
 		props: Optional<UserProps, "createdAt" | "role">,
 		id?: UniqueEntityID

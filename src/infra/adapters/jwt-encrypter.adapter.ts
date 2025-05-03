@@ -12,7 +12,9 @@ export class JwtEncrypter implements Encrypter {
 				sub: payload.sub,
 			},
 			{
-				expiresIn: env.ENV_EXPIRES_IN,
+				sign: {
+					expiresIn: env.ENV_EXPIRES_IN,
+				},
 			}
 		);
 

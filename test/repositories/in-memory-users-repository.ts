@@ -34,33 +34,7 @@ export class InMemoryUsersRepository implements UsersRepository {
 		return user;
 	}
 
-	async findByPhone(phone: string): Promise<User | null> {
-		const user = this.items.find((user) => user.phone === phone);
-
-		if (!user) {
-			return null;
-		}
-
-		return user;
-	}
-
-	async findMany(): Promise<User[]> {
-		return this.items;
-	}
-
 	async create(user: User): Promise<void> {
 		this.items.push(user);
-	}
-
-	async edit(user: User): Promise<void> {
-		const itemIndex = this.items.findIndex((item) => item.id === user.id);
-
-		this.items[itemIndex] = user;
-	}
-
-	async delete(user: User): Promise<void> {
-		const itemIndex = this.items.findIndex((item) => item.id === user.id);
-
-		this.items.splice(itemIndex, 1);
 	}
 }

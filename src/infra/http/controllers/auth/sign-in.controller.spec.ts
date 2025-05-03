@@ -7,7 +7,6 @@ import { hash } from "bcrypt";
 describe("Sign In (e2e)", () => {
 	beforeAll(async () => {
 		await app.ready();
-		app.listen({ port: 0 });
 	});
 
 	afterAll(async () => {
@@ -39,7 +38,9 @@ describe("Sign In (e2e)", () => {
 			expect.objectContaining({
 				success: true,
 				errors: null,
-				data: expect.any(Object),
+				data: {
+					accessToken: expect.any(String),
+				},
 			})
 		);
 	});

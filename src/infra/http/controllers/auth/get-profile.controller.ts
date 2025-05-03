@@ -4,12 +4,13 @@ import { makeGetProfileUseCase } from "../../../database/prisma/use-cases/make-g
 import { errorResponseSchema, successResponseSchema } from "../../schemas/http";
 import { verifyJwt } from "../../middleware/auth";
 import { getProfileResponseSchema } from "../../schemas/auth";
+import { verifyUserRole } from "../../middleware/verify-user-role";
 
 export async function getProfile(app: FastifyInstance) {
 	app.withTypeProvider<ZodTypeProvider>().get(
 		"/users/profile",
 		{
-			onRequest: [verifyJwt],
+			onRequest: [verifyJwt, verifyUserRole("MEMBER")],
 			schema: {
 				tags: ["Users"],
 				operationId: "getProfile",

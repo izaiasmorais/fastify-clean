@@ -7,7 +7,6 @@ import { hash } from "bcrypt";
 describe("Register (e2e)", () => {
 	beforeAll(async () => {
 		await app.ready();
-		app.listen({ port: 0 });
 	});
 
 	afterAll(async () => {
