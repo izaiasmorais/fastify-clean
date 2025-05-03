@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  vitest-environment-prisma: link:prisma/vitest-environment-prisma
+  vitest-environment-prisma: link:../.local/share/pnpm/global/5/node_modules/vitest-environment-prisma
 
 importers:
 
@@ -48,8 +48,8 @@ importers:
         specifier: ^11.0.3
         version: 11.1.0
       vitest-environment-prisma:
-        specifier: link:prisma/vitest-environment-prisma
-        version: link:prisma/vitest-environment-prisma
+        specifier: link:../.local/share/pnpm/global/5/node_modules/vitest-environment-prisma
+        version: link:../.local/share/pnpm/global/5/node_modules/vitest-environment-prisma
       zod:
         specifier: ^3.23.8
         version: 3.24.3
