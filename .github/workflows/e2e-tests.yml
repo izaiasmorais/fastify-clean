@@ -51,8 +51,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
-      - name: Build project
-        run: pnpm generate && pnpm build
+      - name: Migrate Database
+        run: pnpm migrate
+
+      - name: Generate Prisma Client
+        run: pnpm generate
+
+      - name: Build Project
+        run: pnpm build
 
       - name: Run E2E tests
         run: pnpm test:e2e
