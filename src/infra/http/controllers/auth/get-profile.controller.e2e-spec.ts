@@ -1,20 +1,21 @@
 import request from "supertest";
-import { afterAll, beforeAll, beforeEach, describe, it, expect } from "vitest";
-import { app } from "../../app";
+import { afterAll, beforeAll, describe, it, expect } from "vitest";
+import { buildApp } from "../../app";
 import { prisma } from "../../../database/prisma/prisma";
 import { hash } from "bcrypt";
+import fastify, { FastifyInstance } from "fastify";
 
 describe("Get Profile (e2e)", () => {
+	let app: FastifyInstance;
+
 	beforeAll(async () => {
+		app = fastify();
+		buildApp(app);
 		await app.ready();
 	});
 
 	afterAll(async () => {
 		await app.close();
-	});
-
-	beforeEach(async () => {
-		await prisma.user.deleteMany();
 	});
 
 	it("should be able to get user profile", async () => {

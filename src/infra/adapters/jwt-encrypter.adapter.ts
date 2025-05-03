@@ -13,7 +13,7 @@ export class JwtEncrypter implements Encrypter {
 			},
 			{
 				sign: {
-					expiresIn: env.ENV_EXPIRES_IN,
+					expiresIn: env.EXPIRES_IN,
 				},
 			}
 		);

@@ -12,15 +12,12 @@
 		"studio": "pnpm prisma studio -b chrome -p 5174",
 		"lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
 		"lint:fix": "eslint src --ext ts,tsx --fix",
-		"test:create-prisma-environment": "pnpm link ./prisma/vitest-environment-prisma",
-		"test:install-prisma-environment": "pnpm link vitest-environment-prisma",
-		"pretest:e2e": "run-s test:create-prisma-environment test:install-prisma-environment",
-		"test": "vitest run --dir src/domain",
-		"test:watch": "vitest --dir src/domain",
-		"test:e2e": "vitest run --dir src/infra/http",
-		"test:e2e:watch": "vitest --dir src/infra/http",
-		"test:cov": "vitest run --coverage",
-		"test:ui": "vitest --ui"
+		"test:ui": "vitest --ui",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:e2e": "vitest run --no-file-parallelism -c ./vitest.config.e2e.mts",
+		"test:e2e:watch": "vitest --no-file-parallelism -c ./vitest.config.e2e.mts",
+		"test:cov": "vitest run --coverage --no-file-parallelism -c ./vitest.config.coverage.mts"
 	},
 	"devDependencies": {
 		"@types/bcrypt": "^5.0.2",
@@ -66,9 +63,6 @@
 			"bcrypt",
 			"esbuild",
 			"prisma"
-		],
-		"overrides": {
-			"vitest-environment-prisma": "link:../.local/share/pnpm/global/5/node_modules/vitest-environment-prisma"
-		}
+		]
 	}
 }

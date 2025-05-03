@@ -10,7 +10,7 @@ const envSchema = z.object({
 		.default("development")
 		.optional(),
 	JWT_SECRET: z.string(),
-	ENV_EXPIRES_IN: z.coerce
+	EXPIRES_IN: z.coerce
 		.number()
 		.default(60 * 60)
 		.optional(), // 1 hour

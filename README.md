@@ -92,7 +92,7 @@ Configure o arquivo .env com suas credenciais (baseado no .env.example):
 
 ```env
 NODE_ENV=development
-ENV_EXPIRES_IN=10000
+EXPIRES_IN=10000
 PORT=3333
 DATABASE_URL=postgresql://postgres:docker@localhost:5432/fastify
 ```

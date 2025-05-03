@@ -1,20 +1,21 @@
 import request from "supertest";
-import { describe, expect, it, beforeEach, beforeAll, afterAll } from "vitest";
-import { app } from "../../app";
+import { describe, expect, it, beforeAll, afterAll } from "vitest";
 import { prisma } from "../../../database/prisma/prisma";
 import { hash } from "bcrypt";
+import fastify, { FastifyInstance } from "fastify";
+import { buildApp } from "../../app";
 
 describe("Register (e2e)", () => {
+	let app: FastifyInstance;
+
 	beforeAll(async () => {
+		app = fastify();
+		buildApp(app);
 		await app.ready();
 	});
 
 	afterAll(async () => {
 		await app.close();
-	});
-
-	beforeEach(async () => {
-		await prisma.user.deleteMany();
 	});
 
 	it("should be able to register", async () => {

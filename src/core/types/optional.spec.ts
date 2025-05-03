@@ -1,6 +1,7 @@
 import { Optional } from "./optional";
 import { test, expect } from "vitest";
 
+// Example type to test Optional
 type User = {
 	id: string;
 	name: string;
@@ -8,47 +9,46 @@ type User = {
 	age: number;
 };
 
-type OptionalUser = Optional<User, "id" | "email">;
-
-function createUser(user: OptionalUser): User {
+// Function that uses Optional type
+function createUser(user: Optional<User, "id" | "age">): User {
 	return {
 		id: user.id ?? "default-id",
 		name: user.name,
-		email: user.email ?? "default@email.com",
-		age: user.age,
+		email: user.email,
+		age: user.age ?? 0,
 	};
 }
 
-test("should accept object with all required fields", () => {
-	const user: OptionalUser = {
+test("should create user with optional id and age", () => {
+	const userData = {
 		name: "John Doe",
-		age: 30,
+		email: "john@example.com",
 	};
 
-	const result = createUser(user);
+	const user = createUser(userData);
 
-	expect(result).toEqual({
+	expect(user).toEqual({
 		id: "default-id",
 		name: "John Doe",
-		email: "default@email.com",
-		age: 30,
+		email: "john@example.com",
+		age: 0,
 	});
 });
 
-test("should accept object with optional fields provided", () => {
-	const user: OptionalUser = {
-		id: "custom-id",
+test("should create user with all fields provided", () => {
+	const userData = {
+		id: "123",
 		name: "John Doe",
-		email: "john@email.com",
-		age: 30,
+		email: "john@example.com",
+		age: 25,
 	};
 
-	const result = createUser(user);
+	const user = createUser(userData);
 
-	expect(result).toEqual({
-		id: "custom-id",
+	expect(user).toEqual({
+		id: "123",
 		name: "John Doe",
-		email: "john@email.com",
-		age: 30,
+		email: "john@example.com",
+		age: 25,
 	});
 });

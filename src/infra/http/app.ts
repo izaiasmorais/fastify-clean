@@ -15,37 +15,40 @@ import { authRoutes } from "./controllers/auth/auth.routes";
 
 const version = "1.0.0 - Release 1";
 
-export const app = fastify().withTypeProvider<ZodTypeProvider>();
-
-app.setValidatorCompiler(validatorCompiler);
-app.setSerializerCompiler(serializerCompiler);
-app.setErrorHandler(errorHandler);
-app.register(fastifyCors);
-app.register(fastifySwagger, {
-	openapi: {
-		info: {
-			title: `Fastify Clean Arc API - ${env.NODE_ENV} - [Version: ${version}]`,
-			description:
-				"Uma API autodocumentável construída com Fastify, utilizando arquitetura limpa, SOLID e DDD.",
-			version: version,
-		},
-		components: {
-			securitySchemes: {
-				bearerAuth: {
-					type: "http",
-					scheme: "bearer",
-					bearerFormat: "JWT",
+export function buildApp(app = fastify().withTypeProvider<ZodTypeProvider>()) {
+	app.setValidatorCompiler(validatorCompiler);
+	app.setSerializerCompiler(serializerCompiler);
+	app.setErrorHandler(errorHandler);
+	app.register(fastifyCors);
+	app.register(fastifySwagger, {
+		openapi: {
+			info: {
+				title: `Fastify Clean Arc API - ${env.NODE_ENV} - [Version: ${version}]`,
+				description:
+					"Uma API autodocumentável construída com Fastify, utilizando arquitetura limpa, SOLID e DDD.",
+				version: version,
+			},
+			components: {
+				securitySchemes: {
+					bearerAuth: {
+						type: "http",
+						scheme: "bearer",
+						bearerFormat: "JWT",
+					},
 				},
 			},
 		},
-	},
-	transform: jsonSchemaTransform,
-});
-app.register(fastifySwaggerUI, {
-	routePrefix: "/",
-});
-app.register(fastifyJwt, {
-	secret: env.JWT_SECRET,
-});
+		transform: jsonSchemaTransform,
+	});
+	app.register(fastifySwaggerUI, {
+		routePrefix: "/",
+	});
+	app.register(fastifyJwt, {
+		secret: env.JWT_SECRET,
+	});
+	app.register(authRoutes);
 
-app.register(authRoutes);
+	return app;
+}
+
+export const app = buildApp();
