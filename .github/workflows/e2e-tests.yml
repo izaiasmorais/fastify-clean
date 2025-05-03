@@ -53,6 +53,9 @@ jobs:
 
       - name: Migrate Database
         run: pnpm migrate
+        env:
+          JWT_SECRET: testing
+          DATABASE_URL: "postgresql://docker:docker@localhost:5432/fastify?schema=public"
 
       - name: Generate Prisma Client
         run: pnpm generate
