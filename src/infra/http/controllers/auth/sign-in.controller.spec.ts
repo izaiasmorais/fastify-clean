@@ -1,20 +1,21 @@
 import request from "supertest";
 import { afterAll, beforeAll, beforeEach, describe, it, expect } from "vitest";
-import { app } from "../../server";
+import { app } from "../../app";
 import { prisma } from "../../../database/prisma/prisma";
 import { hash } from "bcrypt";
 
 describe("Sign In (e2e)", () => {
 	beforeAll(async () => {
 		await app.ready();
-	});
-
-	beforeEach(async () => {
-		await prisma.$executeRaw`TRUNCATE TABLE users`;
+		app.listen({ port: 0 });
 	});
 
 	afterAll(async () => {
 		await app.close();
+	});
+
+	beforeEach(async () => {
+		await prisma.user.deleteMany();
 	});
 
 	it("should be able to sign in", async () => {

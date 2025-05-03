@@ -1,6 +1,6 @@
 import request from "supertest";
 import { expect, afterAll, beforeAll, beforeEach, describe, it } from "vitest";
-import { app } from "../../server";
+import { app } from "../../app";
 import { prisma } from "../../../database/prisma/prisma";
 import { hash } from "bcrypt";
 
@@ -9,12 +9,12 @@ describe("Get Profile (e2e)", () => {
 		await app.ready();
 	});
 
-	beforeEach(async () => {
-		await prisma.$executeRaw`TRUNCATE TABLE users`;
-	});
-
 	afterAll(async () => {
 		await app.close();
+	});
+
+	beforeEach(async () => {
+		await prisma.user.deleteMany();
 	});
 
 	it("should be able to get user profile", async () => {
