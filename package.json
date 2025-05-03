@@ -5,7 +5,7 @@
 	"main": "server.js",
 	"scripts": {
 		"dev": "tsx watch src/infra/http/server.ts",
-		"build": "tsup src !src/**/*.spec.ts !src/**/test/**/* --out-dir dist --minify",
+		"build": "tsup src --out-dir dist",
 		"start": "node dist/infra/http/server.js",
 		"migrate": "pnpm prisma migrate dev",
 		"generate": "pnpm prisma generate",
